@@ -1,4 +1,4 @@
-pipeline:
+kind: pipeline
 steps:
 - name: kubectl
   image: anoop600/updatedkubectl
