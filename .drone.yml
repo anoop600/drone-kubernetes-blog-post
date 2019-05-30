@@ -1,6 +1,6 @@
 pipeline:
 steps:
 - name: kubectl
-    image: anoop600/updatedkubectl
-    commands: 
-    - "kubectl get nodes"
+  image: anoop600/updatedkubectl
+  commands: 
+  - "kubectl get nodes"
