@@ -5,3 +5,5 @@ steps:
   image: anoop600/updatedkubectl:2
   commands:
   - kubectl get nodes
+  - kubectl apply -f deployment.yaml
+  - kubectl apply -f service.yaml
