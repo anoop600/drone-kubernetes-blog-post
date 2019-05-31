@@ -2,6 +2,6 @@ kind: pipeline
 name: default
 steps:
 - name: kubectl
-  image: anoop600/updatedkubectl
+  image: anoop600/updatedkubectl:2
   commands:
   - kubectl get nodes
