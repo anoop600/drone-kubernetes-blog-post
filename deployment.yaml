@@ -1,36 +1,28 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Pod
 metadata:
-  name: vote
+  name: web
+  labels:
+    tier: front
+    app: nginx
+    role: ui
 spec:
-  replicas: 5
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 2
-      maxUnavailable: 1
-  revisionHistoryLimit: 4
-  paused: false
-  minReadySeconds: 20
-  selector:
-    matchLabels:
-      role: vote
-    matchExpressions:
-      - {key: version, operator: In, values: [v1, v2, v3]}
-  template:
-    metadata:
-      name: vote
-      labels:
-        app: python
-        role: vote
-        version: v1
-    spec:
-      containers:
-        - name: app
-          image: anoop600/vote:v1
-          envFrom:
-            - configMapRef:
-                name: vote
-          ports:
-            - containerPort: 80
-              protocol: TCP
+  containers:
+    - name: nginx
+      image: nginx:stable-alpine
+      ports:
+        - containerPort: 80
+          protocol: TCP
+      volumeMounts:
+        - name: data
+          mountPath: /var/www/html-sample-app
+ 
+    - name: sync
+      image: schoolofdevops/sync:v2
+      volumeMounts:
+        - name: data
+          mountPath: /var/www/app
+ 
+  volumes:
+    - name: data
+      emptyDir: {}
