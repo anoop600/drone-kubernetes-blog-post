@@ -1,15 +1,12 @@
 kind: pipeline
 name: default
 steps:
-- name: kubectl apply
+- name: Deploy to Kubernetes
   image: anoop600/updatedkubectl:2
   commands:
   - kubectl get nodes
-  - kubectl apply -f deployment.yaml
-  
-- name: kubectl get pods 
-  image: anoop600/updatedkubectl:2
-  commands:
   - kubectl get pods
+  - kubectl apply -f ./dev
+  
   
   
